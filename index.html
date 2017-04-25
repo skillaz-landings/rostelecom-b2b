@@ -51,7 +51,7 @@
                 }
             };
             var invDetId = getUrlParameter('invDetId');
-            var e = document.getElementsByClassName("page-header__text-management-btn");
+            var e = document.getElementsByClassName("goToInterview");
             var url = invDetId ? 'https://ap.skillaz.co/invitation/' + invDetId + '/start' : GOTOINTERVIEWURL;
             for (var i = 0; i < e.length; i++) {
                 e[i].setAttribute('href', url);
@@ -75,8 +75,8 @@
                 (В2В сегмент)
             </div>
             <div class="page-header__text-management">
-                <a class="btn page-header__text-management-btn" href="#">ПРОЙТИ ОНЛАЙН-СОБЕСЕДОВАНИЕ</a>
-                <a class="page-header__text-management-detail" href="#">ПОДРОБНЕЕ</a>
+                <a class="btn page-header__text-management-btn goToInterview" href="#">ПРОЙТИ ОНЛАЙН-СОБЕСЕДОВАНИЕ</a>
+                <a class="page-header__text-management-detail" href="#responsibility-requirement">ПОДРОБНЕЕ</a>
             </div>
         </div>
     </div>
@@ -91,8 +91,8 @@
             (В2В сегмент)
         </div>
         <div class="page-header__text-management">
-            <a class="btn page-header__text-management-btn" href="#">ПРОЙТИ ОНЛАЙН-СОБЕСЕДОВАНИЕ</a>
-            <a class="page-header__text-management-detail" href="#">ПОДРОБНЕЕ</a>
+            <a class="btn page-header__text-management-btn goToInterview" href="#">ПРОЙТИ ОНЛАЙН-СОБЕСЕДОВАНИЕ</a>
+            <a class="page-header__text-management-detail" href="#responsibility-requirement">ПОДРОБНЕЕ</a>
         </div>
     </div>
 </header>
@@ -146,7 +146,7 @@
             </div>
         </div>
     </div>
-    <div class="responsibility-requirement">
+    <div class="responsibility-requirement" id="responsibility-requirement">
         <div class="responsibility-requirement-container container">
             <div class="responsibility">
                 <div class="responsibility__title">
@@ -248,7 +248,7 @@
         <div class="join__title">
             Присоединяйся к команде Ростелеком!
         </div>
-        <a class="btn join__btn" href="">
+        <a class="btn join__btn goToInterview" href="">
             ПРОЙТИ ОНЛАЙН-СОБЕСЕДОВАНИЕ
         </a>
     </div>
@@ -265,7 +265,7 @@
         <div class="top-line__text">
             Внешний торговый представитель
         </div>
-        <a href="#" class="btn top-line__btn">
+        <a href="#" class="btn top-line__btn goToInterview">
             ПРОЙТИ ОНЛАЙН-СОБЕСЕДОВАНИЕ
         </a>
     </div>
@@ -276,6 +276,37 @@
             var fromTop = $("body").scrollTop()
             $('.top-line').toggleClass("sticky", (fromTop > $('.page-header').height()))
         })
+
+        $('a[href*="#"]')
+            .not('[href="#"]')
+            .not('[href="#0"]')
+            .click(function (event) {
+                // On-page links
+                if (
+                    location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+                    &&
+                    location.hostname == this.hostname
+                ) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        event.preventDefault();
+                        $('html, body').animate({
+                            scrollTop: target.offset().top - 20
+                        }, 1000, function () {
+                            var $target = $(target);
+                            $target.focus();
+                            if ($target.is(":focus")) {
+                                return false;
+                            } else {
+                                $target.attr('tabindex', '-1');
+                                $target.focus();
+                            }
+                            ;
+                        });
+                    }
+                }
+            });
     })
 </script>
 </body>
