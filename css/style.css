@@ -849,3 +849,26 @@
     display: none;
   }
 }
+
+.down-arrow {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+  text-align: center;
+  font-size: 1em;
+}
+
+.down-arrow:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 0;
+  height: 0;
+  border-top: 20px solid #00ABE8;
+  border-right: 100px solid transparent;
+  border-bottom: 0 solid transparent;
+  border-left: 100px solid transparent;
+  transition: all 1s;
+}
