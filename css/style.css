@@ -850,6 +850,11 @@
   }
 }
 
+.page-header__text-management .page-header__text-management {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 .down-arrow {
   display: inline-block;
   position: relative;
